@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<style>
+    table {
+        border: 1px solid grey;
+    }
+</style>
+<body>
+<div th:each="user1 : ${user}">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Адресс</th>
+
+        </tr> <!--ряд с ячейками заголовков-->
+        <tr>
+            <td th:text="${user1.getId()}"></td>
+            <td th:text="${user1.getName()}"></td>
+            <td th:text="${user1.getLastName()}"></td>
+            <td th:text="${user1.getAge()}"></td>
+            <td th:text="${user1.getAddress()}"></td>
+        </tr> <!--ряд с ячейками тела таблицы-->
+    </table>
+</div>
+</body>
+</html>

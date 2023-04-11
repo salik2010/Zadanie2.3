@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Добавить</title>
 </head>
 <body>
-    <form method="post" action="index.html">
+    <form th:method="POST" th:action="@{/}" th:object="${user}">
         <label for="name">Name</label>
         <input name="name" type="text" id="name"/>
 

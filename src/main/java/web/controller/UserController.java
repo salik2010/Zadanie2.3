@@ -17,6 +17,7 @@ import web.service.UserServicesImp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,18 +56,19 @@ public class UserController {
         return "new";
     }
 
-    @PostMapping("/new")
+    @PostMapping()
     public String create(@ModelAttribute("user") User user, @RequestParam("name") String name,
                          @RequestParam("lastName") String lastName,
                          @RequestParam("age") int age,
                          @RequestParam("address") String address,
                          Model model) {
-        daoUser.save(user);
-//        User user = new User();
+
 //        user.setName(name);
 //        user.setLastName(lastName);
 //        user.setAge(age);
 //        user.setAddress(address);
+        daoUser.save(user);
+//
 //
 //        //entityManager.createQuery()
 //        model.addAttribute("user",user);

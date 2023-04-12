@@ -24,14 +24,11 @@ import java.util.Properties;
 @EnableJpaRepositories("web")
 public class AppConfig {
 
-
     private Properties propertiesHibernate;
-
     private final Environment env;
     public AppConfig(Environment env) {
         this.env = env;
     }
-
 
     @Bean
     public DataSource getDataSource() {

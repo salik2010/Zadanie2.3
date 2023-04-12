@@ -9,18 +9,15 @@ import web.entity.User;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServicesImp implements UserServices{
 
+    private final DaoUserImp daoUserImp;
 
-
-    private DaoUserImp daoUserImp;
-
-    @Autowired
-    public void setUserDao(DaoUserImp daoUserImp) {
+    public UserServicesImp(DaoUserImp daoUserImp) {
         this.daoUserImp = daoUserImp;
     }
 
+    @Transactional
     @Override
     public void addUser(User user) {
         daoUserImp.addUser(user);
@@ -28,9 +25,11 @@ public class UserServicesImp implements UserServices{
     public List<User> getAllUsers(){
         return daoUserImp.getAllUsers();
     }
+    @Transactional
     public void deleteUser(Long id){
         daoUserImp.deleteUser(id);
     }
+    @Transactional
     public void edit(User user) {
         daoUserImp.edit(user);
     }

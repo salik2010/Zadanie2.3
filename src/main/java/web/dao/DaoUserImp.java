@@ -8,36 +8,31 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-
-
 @Repository
 public class DaoUserImp implements DaoUser {
 
-
     @PersistenceContext
     private EntityManager entityManager;
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
-    }
+
     public void addUser(User user) {
-        getEntityManager().persist(user);
+        entityManager.persist(user);
     }
 
     public List<User> getAllUsers() {
-        return getEntityManager().createQuery("From User").getResultList();
+        return entityManager.createQuery("From User").getResultList();
     }
     @Override
     public void deleteUser(Long id) {
-        getEntityManager()
+        entityManager
                 .createQuery("delete from User where id=: id")
                 .setParameter("id", id)
                 .executeUpdate();
     }
     public void edit(User user) {
-        getEntityManager().merge(user);
+        entityManager.merge(user);
     }
     public User getUserById(Long id) {
-        return getEntityManager().find(User.class, id);
+        return entityManager.find(User.class, id);
     }
 }
 

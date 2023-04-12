@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить User</title>
+</head>
+<body>
+<form th:action="@{/edit}" th:object="${user}" method="post">
+    <input type="hidden" name="id" th:value="${user.getId()}">
+        <p>Данные пользователя</p>
+        <p>
+            <label th:for="name">Имя</label>
+            <input type="text" name="name" th:id="name" th:value="${user.getName()}">
+            <br/>
+        </p>
+        <p>
+            <label th:for="lastName">Фамилия</label>
+            <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}">
+            <br/>
+        </p>
+        <p>
+            <label th:for="age">Возраст</label>
+            <input type="text" name="age" th:id="age" th:value="${user.getAge()}">
+            <br/>
+        </p>
+        <p>
+            <label th:for="address">Адресс</label>
+            <input type="text" name="address" th:id="address" th:value="${user.getAddress()}">
+            <br/>
+        </p>
+
+    <button type="submit">Изменить данные</button>
+</form>
+</body>
+</html>

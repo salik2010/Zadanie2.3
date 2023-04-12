@@ -5,26 +5,26 @@
     <title>Добавить</title>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/}" th:object="${user}">
+    <form th:method="post" th:action="@{/new}" th:object="${user}">
         <label for="name">Name</label>
-        <input name="name" type="text" id="name"/>
+        <input name="name" type="text" id="name" th:value="${user.getName()}"/>
 
         <br>
 
         <label for="lastName">lastName</label>
-        <input name="lastName" type="text" id="lastName"/>
+        <input name="lastName" type="text" id="lastName" th:value="${user.getLastName()}"/>
 
         <br>
 
         <label for="age">Age</label>
-        <input name="age" type="text" id="age"/>
+        <input name="age" type="text" id="age" th:value="${user.getAge()}"/>
 
         <br>
 
         <label for="address">Address</label>
-        <input name="address" type="text" id="address"/>
+        <input name="address" type="text" id="address" th:value="${user.getAddress()}"/>
 
-        <input type="submit" value="Add User"/>
+        <input th:action="@{/}" type="submit" value="Add User"/>
     </form>
 
 </body>

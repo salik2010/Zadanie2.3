@@ -10,7 +10,7 @@
     }
 </style>
 <body>
-<div th:each="user1 : ${user}">
+<div >
     <table>
         <tr>
             <th>Id</th>
@@ -20,14 +20,31 @@
             <th>Адресс</th>
 
         </tr> <!--ряд с ячейками заголовков-->
-        <tr>
-            <td th:text="${user1.getId()}"></td>
-            <td th:text="${user1.getName()}"></td>
-            <td th:text="${user1.getLastName()}"></td>
-            <td th:text="${user1.getAge()}"></td>
-            <td th:text="${user1.getAddress()}"></td>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getAddress()}"></td>
+            <td>
+                <form th:action="@{/delete(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}">
+
+                    <button type="submit">Изменить</button>
+                </form>
+            </td>
+
+
         </tr> <!--ряд с ячейками тела таблицы-->
     </table>
+
+    <a href="new.html"> Добавить User </a>
+
 </div>
 </body>
 </html>

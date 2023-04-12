@@ -1,51 +1,43 @@
 package web.dao;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import web.entity.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
+
+
+@Repository
 public class DaoUserImp implements DaoUser {
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+
+
+    @PersistenceContext
     private EntityManager entityManager;
-    private static int count;
-    private final List<User> users;
-    {
-
-        users = new ArrayList<>();
-        users.add(new User((long) ++count,"dima","Samoylenko",30,"Partssezd"));
-        users.add(new User((long) ++count,"dima2","Samoylenko2",32,"Partssezd"));
-        users.add(new User((long) ++count,"dima3","Samoylenko3",33,"Partssezd"));
-        users.add(new User((long) ++count,"dima4","Samoylenko4",34,"Partssezd"));
-        users.add(new User((long) ++count,"dima5","Samoylenko5",35,"Partssezd"));
-        //entityManager.persist(new User(1L,"dd","fff",55,"66"));
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+    public void addUser(User user) {
+        getEntityManager().persist(user);
     }
 
-
-
-    public List<User> from(int count) {
-         return users.stream().limit(count).collect(Collectors.toList());
+    public List<User> getAllUsers() {
+        return getEntityManager().createQuery("From User").getResultList();
     }
-
     @Override
-
-    public void save(User user) {
-        //user.setId((long) 1);
-         entityManager.persist(user);
-        //users.add(user);
+    public void deleteUser(Long id) {
+        getEntityManager()
+                .createQuery("delete from User where id=: id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
-//    public daoUser(List<User> users) {
-//        this.users = users;
-//    }
+    public void edit(User user) {
+        getEntityManager().merge(user);
+    }
+    public User getUserById(Long id) {
+        return getEntityManager().find(User.class, id);
+    }
 }
+
